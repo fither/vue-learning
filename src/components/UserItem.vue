@@ -1,10 +1,8 @@
 <template>
   <div class="user-item">
-    <p>
-      <router-link :to="profileLink">
-        {{ user.name }} {{user.username}}
-      </router-link>
-    </p>
+    <router-link class="user-item-link" :to="profileLink">
+      {{ user.name }} {{user.username}}
+    </router-link>
   </div>
 </template>
 
@@ -23,5 +21,28 @@ export default {
 </script>
 
 <style>
+  .user-item {
+    width: 50%;
+    height: 100%;
+    background: turquoise;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5rem;
+    transition: all 300ms ease;
+  }
+
+  .user-item:hover {
+    background-color: blueviolet;
+  }
+
+  .user-item a {
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    height: 100%;
+    padding: 1rem 0;
+  }
 
 </style>

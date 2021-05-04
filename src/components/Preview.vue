@@ -1,13 +1,13 @@
 <template>
-  <div class="preview">
+  <div class="preview" v-cloak>
     <h1 v-if="isLoading">Loading...</h1>
     <h2 v-if="query">Results for: <b>{{query}}</b></h2>
-    <ul v-if="!isLoading">
+    <template v-if="!isLoading">
       <h2 v-if="!gifs.length">No results found</h2>
-      <li v-for="(gif, index) in gifs" :key="index">
+      <div class="gif-box" v-for="(gif, index) in gifs" :key="index">
         <img :src="gif.images.fixed_height.url" alt="">
-      </li>
-    </ul>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -23,10 +23,9 @@ export default {
     flex-wrap: wrap;
   }
 
-  li {
-    list-style: none;
-    float: left;
-    margin: 20px;
+  .gif-box {
+    margin: 1rem;
+    filter: drop-shadow(0 0 .5rem #dd8809);
   }
   
   h2 {

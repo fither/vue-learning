@@ -1,6 +1,6 @@
 <template>
   <div id="user-posts">
-    <router-link :to="userLink">Back</router-link>
+    <router-link class="link" :to="userLink">Back To User Profile</router-link>
     <div class="user-post" v-for="(post, index) in userPosts" :key="index">
       <h2>{{post.title}}</h2>
       <p>{{post.body}}</p>

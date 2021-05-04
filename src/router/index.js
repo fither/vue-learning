@@ -19,16 +19,16 @@ const routes = [
   },
   {
     path: '/users/user/:id',
-    name: 'User Profile',
+    name: 'UserProfile',
     component: () => import('@/views/UserProfile.vue')
   },
   {
     path: '/users/user/:userid/posts',
-    name: 'User Posts',
+    name: 'UserPosts',
     component: () => import('@/views/UserPosts.vue')
   },
   {
-    path: '/notfound',
+    path: '/:pathMatch(.*)*',
     name: '404',
     component: () => import('@/views/NotFound.vue')
   }

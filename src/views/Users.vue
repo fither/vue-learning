@@ -25,10 +25,16 @@ export default {
       .then(res => { return res.json(); })
       .then(res => this.users = res )
   }
-
 }
 </script>
 
 <style>
+  #users {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
 
 </style>

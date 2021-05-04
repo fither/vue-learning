@@ -1,5 +1,11 @@
 <template>
   <div id="user-profile">
+    <!-- <p>
+      <a class="link" @click="goBack">Go To Home</a>
+    </p> -->
+    <router-link class="link" :to="prevUserLink">Prev</router-link>
+    <router-link class="link" to="/users">Back To Users</router-link>
+    <router-link class="link" :to="nextUserLink">Next</router-link>
     <div class="row username">
       <div class="col">Name</div>
       <div class="col">
@@ -21,10 +27,10 @@
     <div class="row usercompany">
       <div class="col">Company</div>
       <div class="col">
-        <span>{{userData.company}}</span>
+        <span>{{companyName}}</span>
       </div>
     </div>
-    <router-link :to="postsLink">Posts</router-link>
+    <router-link class="link" :to="postsLink">Posts</router-link>
   </div>
 </template>
 
@@ -35,18 +41,45 @@ export default {
     return {
       fakeAPI: 'https://jsonplaceholder.typicode.com/users/',
       userData: Object,
-      profileID: Number
+      profileID: Number,
+      companyName: String
     }
   },
   created() {
     this.profileID = this.$route.params.id;
-    fetch(this.fakeAPI + this.profileID)
-      .then(res => { return res.json(); })
-      .then(res => { this.userData = res; })
+    this.fetchData();
+  },
+  methods: {
+    fetchData() {
+      if(this.$route.params.id) {
+        this.profileID = this.$route.params.id;
+        fetch(this.fakeAPI + this.profileID)
+          .then(res => { return res.json() })
+          .then(res => { 
+            this.userData = res;
+            this.companyName = res.company.name;
+           })
+      }
+    },
+    goBack() {
+      this.$router.push('/');
+      this.$router.push({ name: 'UserProfile', params: { id: 2 } })
+      // this.$router.go('-1');
+    }
+  },
+  watch: {
+    '$route': 'fetchData'
   },
   computed: {
     postsLink() {
       return `/users/user/${this.profileID}/posts`
+    },
+    nextUserLink() {
+      return `/users/user/${parseInt(this.profileID) + 1}`
+    },
+    prevUserLink() {
+      let newID = this.profileID > 1 ? this.profileID - 1 : 1;
+      return `/users/user/${newID}`
     }
   }
 }
@@ -68,7 +101,7 @@ export default {
     margin: 0 5rem;
   }
 
-  .row:nth-child(odd) {
+  .row:nth-child(even) {
     background-color: #CCC;
   }
   .col {

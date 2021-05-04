@@ -1,5 +1,5 @@
 <template>
-  <div id="appWrapper">
+  <div id="giphy">
     <Search v-on:searchRequested="handleSearch"/>
     <Preview :query="query" :isLoading="isLoading" :gifs="fetchedGifs" />
   </div>
