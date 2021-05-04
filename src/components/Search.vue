@@ -40,5 +40,6 @@ export default {
     color: #FFF;
     font-size: 16px;
     border-radius: 5px;
+    margin-left: 10px;
   }
 </style>
